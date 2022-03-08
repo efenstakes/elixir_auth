@@ -61,6 +61,12 @@ defmodule AuthrUnoWeb.UserController do
   end
 
 
+  def my_profile(conn, _params) do
+    user = Guardian.Plug.current_resource(conn)
+    user = User.from_map(user)
+    render(conn, "show.json", user: user)
+  end
+
   def secret(conn, _params) do
     render(conn, "secret.json", secret: "yes")
   end

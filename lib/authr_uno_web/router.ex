@@ -24,6 +24,7 @@ defmodule AuthrUnoWeb.Router do
     pipe_through [:api, :jwt_authenticated]
 
     get "/", UserController, :secret
+    get "/my/profile", UserController, :my_profile
   end
 
   # Enables LiveDashboard only for development
