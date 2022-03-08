@@ -1,16 +1,17 @@
 defmodule AuthrUnoWeb.Router do
   use AuthrUnoWeb, :router
 
-  alias AuthrUno.Guardian
-
-
   pipeline :api do
     plug :accepts, ["json"]
   end
 
-  pipeline :jwt_authenticated do
-    plug Guardian.AuthPipeline
+  pipeline :jwt_authenticate do
+    plug AuthrUnoWeb.AuthPlug
   end
+  pipeline :must_jwt_authenticate do
+    plug AuthrUnoWeb.MustAuthPlug
+  end
+
 
 
   scope "/api/users", AuthrUnoWeb do
@@ -21,11 +22,19 @@ defmodule AuthrUnoWeb.Router do
   end
 
   scope "/api/secrets", AuthrUnoWeb do
-    pipe_through [:api, :jwt_authenticated]
+    pipe_through [:api, :jwt_authenticate]
 
     get "/", UserController, :secret
     get "/my/profile", UserController, :my_profile
   end
+
+  scope "/api/zen", AuthrUnoWeb do
+    pipe_through [:api, :must_jwt_authenticate ]
+
+    get "/", UserController, :zen
+  end
+
+
 
   # Enables LiveDashboard only for development
   #

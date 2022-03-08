@@ -52,6 +52,12 @@ config :phoenix, :json_library, Jason
 import_config "#{config_env()}.exs"
 
 
+
+#  Guardian config
 config :authr_uno, AuthrUno.Guardian,
        issuer: "Authr Uno",
        secret_key: "BFRr6rw0RQt8mKyWAHdh81mT01afSoTAMmHx8JXNPNopjhiT4Cqr2csqBC0bwvNC"
+
+
+#  joken config
+config :joken, default_signer: "BFRr6rw0RQt8mKyWAHdh81mT01afSoTAMmHx8JXNPNopjhiT4Cqr2csqBC0bwvNC"

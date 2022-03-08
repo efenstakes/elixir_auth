@@ -47,8 +47,9 @@ defmodule AuthrUno.MixProject do
       {:plug_cowboy, "~> 2.5"},
 
       {:comeonin, "~> 5.3"},
-      {:guardian, "~> 2.2"},
-      {:pbkdf2_elixir, "~> 1.0"}
+      {:pbkdf2_elixir, "~> 1.0"},
+
+      {:joken, "~> 2.4"}
     ]
   end
 
